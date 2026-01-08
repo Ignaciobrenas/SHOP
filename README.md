@@ -1,6 +1,7 @@
 # Shop Application
 
 ## Overview
+This project is a class activity developed as part of the Higher Degree in Web Application Development (Desarrollo de Aplicaciones Web) at STUCOM Pelai.
 
 This release consolidates all fixes and enhancements reflected in the current issue list. All reported bugs have been resolved and all requested improvements have been fully implemented, resulting in a stable, consistent, and functionally complete application.
 
