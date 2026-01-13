@@ -16,7 +16,7 @@
 
 #### Installation
 ```
-git clone https://github.com/Stucom-Pelai/MP0485_RA4_POO_Shop
+git clone https://github.com/Ignaciobrenas/SHOP
 ```
 
 #### Run 
