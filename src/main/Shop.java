@@ -2,6 +2,8 @@ package main;
 
 import model.Product;
 import model.Sale;
+import model.Amount;
+
 import java.util.Scanner;
 
 public class Shop {
@@ -38,6 +40,7 @@ public class Shop {
             System.out.println("5) Ver inventario");
             System.out.println("6) Venta");
             System.out.println("7) Ver ventas");
+            System.out.println("8) Cantidad de ventas");
             System.out.println("10) Salir programa");
             System.out.print("Seleccione una opcion: ");
             opcion = scanner.nextInt();
@@ -72,6 +75,10 @@ public class Shop {
                     break;
 
                 case 8:
+                    shop.totalAmountOfSales();
+                    break;
+
+                case 10:
                     exit = true;
                     break;
             }
@@ -92,7 +99,7 @@ public class Shop {
      * show current total cash
      */
     private void showCash() {
-        System.out.println("Dinero actual: ");
+        System.out.println("Dinero actual: " + cash);
     }
 
     /**
@@ -112,6 +119,9 @@ public class Shop {
         int stock = scanner.nextInt();
 
         addProduct(new Product(name, wholesalerPrice, true, stock));
+        if (findProduct(name) != null) {
+            System.out.println("Este producto ya existe");
+        }
     }
 
     /**
@@ -126,9 +136,8 @@ public class Shop {
         if (product != null) {
             // ask for stock
             System.out.print("Seleccione la cantidad a a\u00f1adir: ");
-            int stock = scanner.nextInt();
-            // update stock product
-            product.setStock(stock);
+            int stockAdd = scanner.nextInt();
+            product.setStock(product.getStock() + stockAdd);
             System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getStock());
 
         } else {
@@ -145,21 +154,25 @@ public class Shop {
         String name = scanner.next();
 
         Product product = findProduct(name);
-
+        
         if (product != null) {
-            System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getPublicPrice());
-
+            product.setStock(0);
+            product.setAvailable(false);
+            System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getStock());
+            
         }
     }
 
     /**
      * show all inventory
      */
+    
     public void showInventory() {
         System.out.println("Contenido actual de la tienda:");
         for (Product product : inventory) {
             if (product != null) {
                 System.out.println(product);
+
             }
         }
     }
@@ -194,7 +207,7 @@ public class Shop {
                 if (product.getStock() == 0) {
                     product.setAvailable(false);
                 }
-                System.out.println("Producto a\u00f1adido con Ã©xito");
+                System.out.println("Producto a\u00f1adido con éxito");
             }
 
             if (!productAvailable) {
@@ -213,8 +226,8 @@ public class Shop {
      */
     private void showSales() {
         System.out.println("Lista de ventas:");
-        for (Sale sale : sales) {
-            if (sale != null) {
+        if (sales != null) {
+            for (Sale sale : sales) {
                 System.out.println(sale);
             }
         }
@@ -262,4 +275,13 @@ public class Shop {
         return null;
     }
 
+    public void totalAmountOfSales() {
+        System.out.println("El numero total de ventas es: " + sales);
+        double total = 0;
+        for (Sale sale : sales) {
+            total += sale.getAmount().getValue();
+        }
+
+        System.out.println("El valor total de las ventas son: " + total);
+    }
 }

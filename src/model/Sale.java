@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class Sale {
 	String client;
 	Product[] products;
-	double amount;
+	Amount amount;
 
-	public Sale(String client, Product[] products, double amount) {
+	public Sale(String client, Product[] products, Amount amount) {
 		super();
 		this.client = client;
 		this.products = products;
@@ -30,17 +30,21 @@ public class Sale {
 		this.products = products;
 	}
 
-	public double getAmount() {
+	public Amount getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(Amount amount) {
 		this.amount = amount;
 	}
 
 	@Override
 	public String toString() {
-		return "Sale [client=" + client + ", products=" + Arrays.toString(products) + ", amount=" + amount + "]";
+                                   String productos = "";
+                                   for (Product pr: products){
+                                       productos += pr.getName()+", ";
+                                   }
+		return "Sale [client=" + client + ", products=" + productos + "amount=" + amount.showAmount() + "]";
 	}
 
 }

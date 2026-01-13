@@ -16,10 +16,16 @@ public class Product {
 		this.id = totalProducts + 1;
 		this.name = name;
 		this.wholesalerPrice = wholesalerPrice;
+                this.publicPrice = wholesalerPrice * 2;
 		this.available = available;
 		this.stock = stock;
 		totalProducts++;
 	}
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", publicPrice=" + publicPrice + ", wholesalerPrice=" + wholesalerPrice + ", available=" + available + ", stock=" + stock + '}';
+    }
 
 	public int getId() {
 		return id;
@@ -81,4 +87,5 @@ public class Product {
 		EXPIRATION_RATE = 0.2;
 		this.publicPrice = this.getPublicPrice() * EXPIRATION_RATE;
 	}
+        
 }
